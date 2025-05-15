@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="DashboardHome"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:attendanceSystem"
+        mc:Ignorable="d" Height="570" Width="681">
+    <UserControl.Resources>
+        <Style TargetType="DataGrid" x:Key="scheduleDataGridStyle">
+            <Setter Property="Background" Value="#FFF0EEEE"/>
+            <Setter Property="Foreground" Value="#FF535151"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="RowBackground" Value="#FFF0EEEE"/>
+            <Setter Property="AlternatingRowBackground" Value="#E6E6FA"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="LightGray"/>
+            <Setter Property="VerticalGridLinesBrush" Value="LightGray"/>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Setter Property="FontSize" Value="8"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="59"/>
+            <Setter Property="Margin" Value="-1,-2,-1,-3"/>
+            <Setter Property="Width" Value="442"/>
+            <Setter Property="Width" Value="422"/>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="#FFCDCEDE" Margin="0,0,10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="86*"/>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="133*"/>
+            <RowDefinition Height="38*"/>
+            <RowDefinition Height="242*"/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="33" Margin="83,47,0,0" VerticalAlignment="Top" Width="285" CornerRadius="8" Background="White" ToolTip="Search a participant or a session by name" Grid.Row="1">
+            <ComboBox x:Name="sessionsComboBox" FontFamily="Century Gothic" FontSize="10" Margin="3,0,4,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC3C3C3"/>
+        </Border>
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="83,20,0,0" VerticalAlignment="Top" Width="160" CornerRadius="12" Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="-450" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF04AE42" Offset="1"/>
+                    <GradientStop Color="#FF22289E"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Label x:Name="label_Copy1" Content="Attendance Ratio" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,15,0,0" Width="112" Foreground="White" FontFamily="Century Gothic" FontWeight="Bold"/>
+        </Border>
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="258,20,0,0" VerticalAlignment="Top" Width="160" CornerRadius="12" Background="#FFF0EEEE" Grid.RowSpan="2">
+            <Label x:Name="label" Content="Participants" FontFamily="Century Gothic" FontWeight="Bold" Margin="19,18,19,50"/>
+        </Border>
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="434,20,0,0" VerticalAlignment="Top" Width="160" CornerRadius="12" Background="#FFF0EEEE" Grid.RowSpan="2">
+            <Label x:Name="label_Copy2" Content="Sessions" FontFamily="Century Gothic" FontWeight="Bold" Margin="15,18,28,50"/>
+        </Border>
+        <Label x:Name="attendance_rate_label" Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="96,64,0,0" Width="45" Foreground="White" FontFamily="Century Gothic" FontWeight="Bold" FontSize="22" Height="37" Grid.RowSpan="2"/>
+        <Label x:Name="nbParticipantsLabel" Content="0" FontFamily="Century Gothic" FontWeight="Bold" Margin="278,64,303,86" FontSize="22" Grid.RowSpan="2"/>
+        <Label x:Name="nbSessionsLabel" Content="0" FontFamily="Century Gothic" FontWeight="Bold" Margin="452,64,123,86" FontSize="22" Grid.RowSpan="2"/>
+
+        <!--Histogramme-->
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="151" Margin="83,91,0,0" Grid.Row="1" VerticalAlignment="Top" Width="285" CornerRadius="12" Background="#FFF0EEEE" Grid.RowSpan="3">
+            <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="-1,9,-1,-1">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Categories" Labels="{Binding Labels}"/>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Valeurs"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Border>
+        <Label x:Name="label_Copy3" Content="Last Session Attendance" FontFamily="Century Gothic" FontWeight="Bold" Margin="-29,18,503,0" Grid.Row="2" RenderTransformOrigin="0.5,0.5" Height="23" VerticalAlignment="Top">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.548"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <!--Tableau Schedule-->
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="151" Margin="379,91,0,0" Grid.Row="1" VerticalAlignment="Top" Width="215" CornerRadius="12" Background="#FFF0EEEE" Grid.RowSpan="3">
+            <DataGrid x:Name="scheduleDataGrid" Style="{StaticResource scheduleDataGridStyle}" Margin="0,28,0,9" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nom" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="auto"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Label x:Name="label_Copy4" Content="Schedule" FontFamily="Century Gothic" FontWeight="Bold" Margin="400,96,149,0" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Height="23" VerticalAlignment="Top" Grid.RowSpan="2">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-1.172"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <!--Tableau des dernières sessions-->
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="218" Margin="83,22,0,0" Grid.Row="3" VerticalAlignment="Top" Width="511" CornerRadius="12" Background="#FFF0EEEE" Grid.RowSpan="2">
+            <DataGrid x:Name="sessionsDataGrid" Style="{StaticResource scheduleDataGridStyle}" AutoGenerateColumns="False" Margin="0,23" BorderBrush="{x:Null}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Reference" Binding="{Binding Ref}" Width="auto"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Start Time" Binding="{Binding StartTime}" Width="*"/>
+                    <DataGridTextColumn Header="End Time" Binding="{Binding EndTime}" Width="*"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding SessionDate}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Label x:Name="label_Copy5" Content="Lastest Sessions" FontFamily="Century Gothic" FontWeight="Bold" Margin="113,25,361,0" Grid.Row="3" RenderTransformOrigin="0.5,0.5" Height="23" VerticalAlignment="Top" Grid.RowSpan="2" Width="100">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.001"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="33" Margin="494,47,0,0" VerticalAlignment="Top" Width="100" CornerRadius="12" Background="#FF22289E" Grid.Row="1">
+            <Button x:Name="button_Copy" Content="Add Schedule" Style="{StaticResource {x:Type Button}}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="23,4,0,3" HorizontalAlignment="Left" Width="55" FontSize="8" Height="Auto" RenderTransformOrigin="0.736,0.417"/>
+        </Border>
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="33" Margin="379,47,0,0" VerticalAlignment="Top" Width="100" CornerRadius="12" Background="#FF04AE42" Grid.Row="1">
+            <Button x:Name="button" Content="Generate Log" Style="{StaticResource {x:Type Button}}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="20,6,0,6" HorizontalAlignment="Left" Width="53" FontSize="8" Height="Auto"/>
+        </Border>
+
+    </Grid>
+</UserControl>

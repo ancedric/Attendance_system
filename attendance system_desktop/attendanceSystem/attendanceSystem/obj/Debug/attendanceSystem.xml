@@ -1,0 +1,178 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+attendanceSystem
+</name>
+</assembly>
+<members>
+<member name="T:attendanceSystem.My.MyWpfExtension">
+ <summary>
+ Module used to define the properties that are available in the My Namespace for WPF
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:attendanceSystem.My.MyWpfExtension.Application">
+ <summary>
+ Returns the application object for the running application
+ </summary>
+</member>
+<member name="P:attendanceSystem.My.MyWpfExtension.Computer">
+ <summary>
+ Returns information about the host computer.
+ </summary>
+</member>
+<member name="P:attendanceSystem.My.MyWpfExtension.User">
+ <summary>
+ Returns information for the current user.  If you wish to run the application with the current 
+ Windows user credentials, call My.User.InitializeWithWindowsUser().
+ </summary>
+</member>
+<member name="P:attendanceSystem.My.MyWpfExtension.Log">
+ <summary>
+ Returns the application log. The listeners can be configured by the application's configuration file.
+ </summary>
+</member>
+<member name="P:attendanceSystem.My.MyWpfExtension.Windows">
+ <summary>
+ Returns the collection of Windows defined in the project.
+ </summary>
+</member>
+<member name="T:attendanceSystem.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:attendanceSystem.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:attendanceSystem.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:attendanceSystem.My.Resources.Resources.Avatar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="T:attendanceSystem.adminControl">
+<summary>
+adminControl
+</summary>
+</member>
+<member name="M:attendanceSystem.adminControl.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:attendanceSystem.AuthenticationWindow">
+<summary>
+AuthenticationWindow
+</summary>
+</member>
+<member name="M:attendanceSystem.AuthenticationWindow.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:attendanceSystem.DashboardHome">
+<summary>
+DashboardHome
+</summary>
+</member>
+<member name="M:attendanceSystem.DashboardHome.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:attendanceSystem.DashboardWindow">
+<summary>
+DashboardWindow
+</summary>
+</member>
+<member name="M:attendanceSystem.DashboardWindow.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:attendanceSystem.LoadingScreen">
+<summary>
+LoadingScreen
+</summary>
+</member>
+<member name="M:attendanceSystem.LoadingScreen.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:attendanceSystem.ParticipantsUserControl">
+<summary>
+ParticipantsUserControl
+</summary>
+</member>
+<member name="M:attendanceSystem.ParticipantsUserControl.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:attendanceSystem.ScanWindow">
+<summary>
+ScanWindow
+</summary>
+</member>
+<member name="M:attendanceSystem.ScanWindow.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:attendanceSystem.SessionUserControl">
+<summary>
+SessionUserControl
+</summary>
+</member>
+<member name="M:attendanceSystem.SessionUserControl.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:attendanceSystem.UsersControl">
+<summary>
+UsersControl
+</summary>
+</member>
+<member name="M:attendanceSystem.UsersControl.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="T:attendanceSystem.Application">
+<summary>
+Application
+</summary>
+</member>
+<member name="M:attendanceSystem.Application.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="M:attendanceSystem.Application.Main">
+<summary>
+Application Entry Point.
+</summary>
+</member>
+<member name="T:attendanceSystem.MainWindow">
+<summary>
+MainWindow
+</summary>
+</member>
+<member name="M:attendanceSystem.MainWindow.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+</members>
+</doc>
