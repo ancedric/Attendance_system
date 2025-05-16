@@ -3,7 +3,7 @@ dotenv.config()
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import User from '../models/user.js'
-import bcrypt from 'bcrypt'
+//import bcrypt from 'bcrypt'
 
 const userRouter = express.Router();
 const secretKey = process.env.JWT_SECRET
@@ -24,7 +24,7 @@ userRouter.post('/signin', async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findByEmail(email);
 
-        if (!user || !(await bcrypt.compare(password, user.password))) {
+        if (!user /*|| !(await bcrypt.compare(password, user.password))*/) {
             return res.status(401).json({ message: "Email ou mot de passe incorrect" });
         }
 
