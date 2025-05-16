@@ -1,5 +1,5 @@
 import db from '../config/db.js' // Connexion MySQL
-import bcrypt from 'bcrypt'
+//import bcrypt from 'bcrypt'
 
 export default class User {
     constructor(userRef, firstName, lastName, email, password) {
@@ -13,12 +13,12 @@ export default class User {
     // Ajouter un utilisateur
     static async create({ firstName, lastName, email, password }) {
         const userRef = `USER_${Date.now()}`;
-        const hashedPassword = await bcrypt.hash(password, 10);
+        //const hashedPassword = await bcrypt.hash(password, 10);
 
         return new Promise((resolve, reject) => {
             db.query(
                 'INSERT INTO users (userRef, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?)',
-                [userRef, firstName, lastName, email, hashedPassword],
+                [userRef, firstName, lastName, email, password],
                 (err, result) => {
                     if (err) return reject(err);
                     resolve(userRef);
@@ -59,9 +59,9 @@ export default class User {
 
     // Mettre à jour le mot de passe
     static async updatePassword(email, newPassword) {
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        //const hashedPassword = await bcrypt.hash(newPassword, 10);
         return new Promise((resolve, reject) => {
-            db.query('UPDATE users SET password = ? WHERE email = ?', [hashedPassword, email], (err, result) => {
+            db.query('UPDATE users SET password = ? WHERE email = ?', [newPassword, email], (err, result) => {
                 if (err) return reject(err);
                 resolve(result.affectedRows > 0);
             });
